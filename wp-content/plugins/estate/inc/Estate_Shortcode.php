@@ -7,6 +7,9 @@ class Estate_Shortcode {
 	}
 
 	public function estate_form() {
+		wp_enqueue_script( 'estate-script' );
+		wp_enqueue_script( 'jquery-form' );
+		wp_enqueue_script( 'estate-script-ajax' );
 
 		ob_start();
 		?>
@@ -41,28 +44,36 @@ class Estate_Shortcode {
 					'required'    => true,
 					'description' => 'Это обязательное поле. Укажите название',
 				],
-				'estate_topics'           => [
+				'estate_type'           => [
 					'type'        => 'select',
-					'label'       => 'Категория мероприятия',
+					'label'       => 'Тип объекта',
 					'input_class' => [ 'select' ],
 					'options'     => $this->get_field_terms(),
 					'required'    => true,
-					'description' => 'Выберите тим здания',
+					'description' => 'Выберите тип объекта',
+				],
+				'estate_city'           => [
+					'type'        => 'select',
+					'label'       => 'Город объекта',
+					'input_class' => [ 'select' ],
+					'options'     => $this->get_field_city(),
+					'required'    => true,
+					'description' => 'Выберите город объекта',
 				],
 				'estate_ploshhad'         => [
 					'type'        => 'text',
-					'label'       => 'Площадь',
-					'description' => 'Укажите площадь',
+					'label'       => 'Площадь объекта',
+					'description' => 'Укажите площадь объекта',
 				],
 				'estate_stoimost'         => [
 					'type'        => 'text',
-					'label'       => 'Стоимость',
-					'description' => 'Укажите стоимость',
+					'label'       => 'Стоимость объекта',
+					'description' => 'Укажите стоимость объекта',
 				],
 				'estate_adres'            => [
 					'type'        => 'text',
-					'label'       => 'Адрес',
-					'description' => 'Укажите стоимость',
+					'label'       => 'Адрес объекта',
+					'description' => 'Укажите адрес объекта',
 				],
 				'estate_zhilaya_ploshhad' => [
 					'type'        => 'text',
@@ -76,8 +87,8 @@ class Estate_Shortcode {
 				],
 				'estate_descriptions'     => [
 					'type'              => 'wysiwyg_editor',
-					'label'             => 'Описание строения',
-					'description'       => 'Добавьте описание строения',
+					'label'             => 'Описание объекта',
+					'description'       => 'Добавьте описание объекта',
 					'custom_attributes' => [
 						'wpautop'          => 1,
 						'media_buttons'    => 0,
@@ -95,7 +106,7 @@ class Estate_Shortcode {
 				],
 				'estate_thumbnail'        => [
 					'type'  => 'file',
-					'label' => 'Миниатюра строения',
+					'label' => 'Миниатюра объекта',
 				],
 
 			]
@@ -122,6 +133,24 @@ class Estate_Shortcode {
 
 		return $field_terms;
 	}
+
+    public function get_field_city(){
+	    $cities = get_posts( array(
+		    'numberposts' => -1,
+		    'orderby'     => 'date',
+		    'order'       => 'DESC',
+		    'post_type'   => 'cities',
+		    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+	    ) );
+
+	    $field_city = [];
+
+	    foreach ( $cities as $city ) {
+		    $field_city[ $city->ID ] = $city->post_title;
+	    }
+
+	    return $field_city;
+    }
 
 
 }

@@ -2,7 +2,7 @@
 
 class Form_Core {
 
-	public function fields_form( $key, $args, $value = null ) {
+	public static function fields_form( $key, $args, $value = null ) {
 
 		$defaults = array(
 			'type'              => 'text',
@@ -32,7 +32,7 @@ class Form_Core {
 			$args['class'][] = 'validate-required';
 			$required        = '&nbsp;<abbr class="required" title="' . esc_attr__( 'required', 'afp' ) . '">*</abbr>';
 		} else {
-			$required = '&nbsp;<span class="optional">(' . esc_html__( 'optional', 'afp' ) . ')</span>';
+			$required = '';
 		}
 
 		if ( is_string( $args['label_class'] ) ) {
@@ -182,7 +182,7 @@ class Form_Core {
 				break;
 			case 'wysiwyg_editor' :
 				wp_localize_script(
-					'afcp-script',
+					'estate-script',
 					'field_editor',
 					[
 						'key' => esc_attr( $key ),

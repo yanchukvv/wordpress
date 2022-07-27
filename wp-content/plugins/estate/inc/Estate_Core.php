@@ -14,6 +14,7 @@ class Estate_Core {
 
 	public function hooks() {
 
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
 		add_action( 'init', [ $this, 'register_new_posts_types' ] );
 		add_action( 'init', [ $this, 'register_taxonomy' ] );
 
@@ -26,6 +27,36 @@ class Estate_Core {
 
 		require_once EST_DIR . 'inc/Estate_Shortcode.php';
 		new Estate_Shortcode();
+
+		require_once EST_DIR . 'inc/Estate_Ajax.php';
+		new Estate_Ajax();
+
+	}
+	public function enqueue() {
+
+		wp_register_script(
+			'estate-script',
+			EST_URI . 'assets/script.js',
+			[ 'jquery' ],
+			filemtime( EST_DIR . 'assets/script.js' ),
+			true
+		);
+		wp_register_script(
+			'estate-script-ajax',
+			EST_URI . 'assets/estate-ajax.js',
+			[ 'jquery' ],
+			filemtime( EST_DIR . 'assets/estate-ajax.js' ),
+			true
+		);
+		wp_localize_script(
+			'estate-script-ajax',
+			'estate_ajax',
+			[
+				'url'   => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'estate-nonce' ),
+			]
+		);
+
 
 	}
 

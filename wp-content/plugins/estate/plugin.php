@@ -13,3 +13,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+define( 'AFCP_DIR', plugin_dir_path( __FILE__ ) );
+define( 'AFCP_URI', plugin_dir_url( __FILE__ ) );
+
+require AFCP_DIR . 'inc/Estate_Core.php';
+
+if (!function_exists('estate')){
+	function estate() {
+
+		return Estate_Core::instance();
+	}
+
+	estate();
+}

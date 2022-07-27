@@ -8,6 +8,8 @@ class Estate_Core {
 
 		$this->hooks();
 
+		$this->includes();
+
 	}
 
 	public function hooks() {
@@ -16,12 +18,24 @@ class Estate_Core {
 		add_action( 'init', [ $this, 'register_taxonomy' ] );
 
 	}
+
+	public function includes() {
+
+		require_once EST_DIR . 'helper/Form.php';
+		new Form_Core();
+
+		require_once EST_DIR . 'inc/Estate_Shortcode.php';
+		new Estate_Shortcode();
+
+	}
+
 	public function register_taxonomy() {
 
 
 		register_taxonomy( 'type', [ 'buildings' ], [
-			'label'                 => '', // определяется параметром $labels->name
-			'labels'                => [
+			'label'             => '',
+			// определяется параметром $labels->name
+			'labels'            => [
 				'name'              => 'Тип недвижимости',
 				'singular_name'     => 'Тип недвижимости',
 				'search_items'      => 'Найти Тип недвижимости',
@@ -36,17 +50,22 @@ class Estate_Core {
 				'menu_name'         => 'Добавить Тип недвижимости',
 				'back_to_items'     => '← Вернутся к Типу недвижимости',
 			],
-			'show_ui'               => true,
-			'description'           => '', // описание таксономии
-			'public'                => true,
-			'hierarchical'          => false,
-			'rewrite'               => true,
-			'capabilities'          => array(),
-			'show_admin_column'     => true, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
-			'show_in_rest'          => true, // добавить в REST API
-			'rest_base'             => null, // $taxonomy
+			'show_ui'           => true,
+			'description'       => '',
+			// описание таксономии
+			'public'            => true,
+			'hierarchical'      => false,
+			'rewrite'           => true,
+			'capabilities'      => array(),
+			'show_admin_column' => true,
+			// авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
+			'show_in_rest'      => true,
+			// добавить в REST API
+			'rest_base'         => null,
+			// $taxonomy
 		] );
 	}
+
 	public function register_new_posts_types() {
 		$labels["buildings"] = [
 			'name'               => 'Строения',
@@ -64,7 +83,7 @@ class Estate_Core {
 			'not_found'          => 'Строения не найдены.',
 			'not_found_in_trash' => 'Строения не найдены в корзине.',
 		];
-		$labels["cities"] = [
+		$labels["cities"]    = [
 			'name'               => 'Города',
 			'singular_name'      => 'Город',
 			'menu_name'          => 'Города',
@@ -81,19 +100,19 @@ class Estate_Core {
 			'not_found_in_trash' => 'Города не найдены в корзине.',
 		];
 
-		foreach ($labels as $key => $label) {
+		foreach ( $labels as $key => $label ) {
 			$args = [
-				'labels'               => $label,
-				'public'               => true,
-				'publicly_queryable'   => true,
-				'show_ui'              => true,
-				'show_in_menu'         => true,
-				'capability_type'      => 'post',
-				'has_archive'          => true,
-				'hierarchical'         => false,
-				'menu_position'        => null,
-				'menu_icon'            => 'dashicons-screenoptions',
-				'supports'             => [
+				'labels'             => $label,
+				'public'             => true,
+				'publicly_queryable' => true,
+				'show_ui'            => true,
+				'show_in_menu'       => true,
+				'capability_type'    => 'post',
+				'has_archive'        => true,
+				'hierarchical'       => false,
+				'menu_position'      => null,
+				'menu_icon'          => 'dashicons-screenoptions',
+				'supports'           => [
 					'title',
 					'editor',
 					'custom-fields',
@@ -101,7 +120,7 @@ class Estate_Core {
 				]
 			];
 
-			register_post_type($key, $args);
+			register_post_type( $key, $args );
 		}
 
 	}

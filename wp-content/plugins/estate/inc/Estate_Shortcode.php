@@ -10,7 +10,7 @@ class Estate_Shortcode {
 
 		ob_start();
 		?>
-        <form action="POST" id="event-form" class="event-form">
+        <form action="POST" id="estate-form" class="estate-form">
 
 			<?php
 			foreach ( $this->fields() as $key => $value ):
@@ -33,7 +33,7 @@ class Estate_Shortcode {
 	public function fields() {
 
 		return apply_filters(
-			'afcp_fields',
+			'estate_fields',
 			[
 				'estate_title'            => [
 					'type'        => 'text',

@@ -26,7 +26,7 @@ class Form_Core {
 		);
 
 		$args = wp_parse_args( $args, $defaults );
-		$args = apply_filters( 'afp_form_field_args', $args, $key, $value );
+		$args = apply_filters( 'form_field_args', $args, $key, $value );
 
 		if ( $args['required'] ) {
 			$args['class'][] = 'validate-required';

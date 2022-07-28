@@ -30,7 +30,6 @@ class Estate_Ajax {
 				'zhilaya_ploshhad' => sanitize_text_field( $_POST['estate_zhilaya_ploshhad'] ),
 				'etazh'            => sanitize_text_field( $_POST['estate_etazh'] ),
 				'_gorod'           => sanitize_text_field( $_POST['estate_city'] ),
-				'gorod'            => sanitize_text_field( $_POST['estate_city'] ),
 			],
 			'tax_input'    => [
 				'type' => $_POST['estate_type'],

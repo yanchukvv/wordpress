@@ -37,9 +37,9 @@ $container = get_theme_mod( 'understrap_container_type' );
 					?>
 
                 </main><!-- #main -->
-
+                <div class="container"><?php echo do_shortcode( '[estate_form]' ); ?></div>
                 <!-- Do the right sidebar check -->
-				<?php echo do_shortcode( '[estate_form]' ); ?>
+
 
             </div><!-- .row -->
 

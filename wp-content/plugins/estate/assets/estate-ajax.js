@@ -25,6 +25,7 @@ jQuery(function ($) {
                     });
                 } catch (e) {
                     add_message(response.data.message, 'danger');
+                    buttonSubmit.text('Добавить объект');
                 }
 
             } else {
@@ -41,7 +42,7 @@ jQuery(function ($) {
 
 function add_message($msg, $type) {
     var body = jQuery('body');
-    var html = '<div class="alert alert-' + $type + '">' + $msg + '</div>';
+    var html = '<div class="position-fixed alert alert-' + $type + '">' + $msg + '</div>';
     body.find(jQuery('.alert')).remove();
     body.fadeIn('slow').prepend(html);
 

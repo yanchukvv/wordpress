@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
         </div>
         <div class="entry-content col-sm">
 
-            <h3>Описание города</h3>
+            <h4>Описание города</h4>
 			<?php
 			the_content();
 			?>

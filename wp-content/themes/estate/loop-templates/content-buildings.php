@@ -21,15 +21,16 @@ defined( 'ABSPATH' ) || exit;
         </div>
         <div class="entry-content col-sm">
             <ul class="list-group">
-                <li class="list-group-item"><b>Стоимость:</b> <?php the_field( 'stoimost' ); ?></li>
+                <li class="list-group-item"><b>Стоимость:</b> <?php the_field( 'stoimost' ); ?> ₽</li>
                 <li class="list-group-item"><b>Адрес:</b> <?php the_field( 'adres' ); ?></li>
-                <li class="list-group-item"><b>Жилая площадь:</b> <?php the_field( 'zhilaya_ploshhad' ); ?></li>
+                <li class="list-group-item"><b>Площадь:</b> <?php the_field( 'ploshhad' ); ?> м²</li>
+                <li class="list-group-item"><b>Жилая площадь:</b> <?php the_field( 'zhilaya_ploshhad' ); ?> м²</li>
                 <li class="list-group-item"><b>Этаж:</b> <?php the_field( 'etazh' ); ?></li>
             </ul>
         </div><!-- .entry-content -->
     </div>
     <div class="container mt-4">
-        <h3>Описание объекта</h3>
+        <h4>Описание объекта</h4>
         <div class="row">
 				<?php
 				the_content();

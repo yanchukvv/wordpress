@@ -18,10 +18,10 @@ get_header();
 
 ?>
 
-	<div class="container">
+    <div class="container">
         <h2 class="align-content-end mt-4">Города</h2>
-		<div class="row">
-			<div class="container mt-4">
+        <div class="row">
+            <div class="container mt-4">
 				<?php
 				$cities = get_posts( array(
 					'numberposts'      => - 1,
@@ -32,27 +32,27 @@ get_header();
 				) );
 				if ( $cities ) {
 					?>
-					<ul class="list-group">
+                    <ul class="list-group">
 						<?php
 						foreach ( $cities as $post ) {
 							setup_postdata( $post ); ?>
-							<li class="list-group-item">
+                            <li class="list-group-item">
 
 								<?php get_template_part( 'loop-templates/content', 'cities-home' ); ?>
-							</li>
+                            </li>
 
 						<?php }
 						wp_reset_postdata(); ?>
-					</ul>
+                    </ul>
 				<?php } ?>
-			</div>
+            </div>
 
-		</div>
-	</div>
-	<div class="container">
+        </div>
+    </div>
+    <div class="container">
         <h2 class="align-content-end mt-4">Объекты недвижемости</h2>
-		<div class="row">
-			<div class="container mt-4">
+        <div class="row">
+            <div class="container mt-4">
 				<?php
 				$buildings = get_posts( array(
 					'numberposts'      => - 1,
@@ -63,23 +63,28 @@ get_header();
 				) );
 				if ( $buildings ) {
 					?>
-					<ul class="list-group">
+                    <ul class="list-group">
 						<?php
 						foreach ( $buildings as $post ) {
 							setup_postdata( $post ); ?>
-							<li class="list-group-item">
+                            <li class="list-group-item">
 
 								<?php get_template_part( 'loop-templates/content', 'buildings-city' ); ?>
-							</li>
+                            </li>
 
 						<?php }
 						wp_reset_postdata(); ?>
-					</ul>
+                    </ul>
 				<?php } ?>
-			</div>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="container">
+			<?php echo do_shortcode( '[estate_form]' ); ?>
+        </div>
+    </div>
 
 <?php
 get_footer();

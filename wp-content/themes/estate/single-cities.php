@@ -19,13 +19,12 @@ $container = get_theme_mod( 'understrap_container_type' );
             <div class="row">
 
 
-                <main class="site-main mb-4" id="main">
+                <main class="site-main mb-4 container" id="main">
 
 					<?php
 					while ( have_posts() ) {
 						the_post();
-						get_template_part( 'loop-templates/content', 'buildings' );
-						understrap_post_nav();
+						get_template_part( 'loop-templates/content', 'cities' );
 						?>
 						<?php
 						// If comments are open or we have at least one comment, load up the comment template.
@@ -37,9 +36,11 @@ $container = get_theme_mod( 'understrap_container_type' );
 					?>
 
                 </main><!-- #main -->
+                <div class="container">
 
+					<?php echo do_shortcode( '[estate_form]' );?>
+                </div>
                 <!-- Do the right sidebar check -->
-				<?php echo do_shortcode( '[estate_form]' ); ?>
 
             </div><!-- .row -->
 

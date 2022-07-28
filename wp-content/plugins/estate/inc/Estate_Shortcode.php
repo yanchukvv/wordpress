@@ -13,17 +13,17 @@ class Estate_Shortcode {
 
 		ob_start();
 		?>
-        <form action="POST" id="estate-form" class="estate-form">
+        <h3>Добавить объект</h3>
+        <form action="POST" id="estate-form" class="needs-validation estate-form" novalidate>
 
 			<?php
-			foreach ( $this->fields() as $key => $value ):
-				Form_Core::fields_form( $key, $value );
-			endforeach;
-			?>
+			foreach ( $this->fields() as $key => $value ): ?>
+				<?php Form_Core::fields_form( $key, $value ); ?>
+			<?php endforeach; ?>
 
             <button
                     type="submit"
-                    class="button submit-estate"
+                    class="button submit-estate btn btn-primary"
                     name="send_estate">
                 Добавить строение
             </button>
@@ -42,52 +42,68 @@ class Estate_Shortcode {
 					'type'        => 'text',
 					'label'       => 'Название',
 					'required'    => true,
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Это обязательное поле. Укажите название',
 				],
-				'estate_type'           => [
+				'estate_type'             => [
 					'type'        => 'select',
 					'label'       => 'Тип объекта',
-					'input_class' => [ 'select' ],
 					'options'     => $this->get_field_terms(),
 					'required'    => true,
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Выберите тип объекта',
 				],
-				'estate_city'           => [
+				'estate_city'             => [
 					'type'        => 'select',
 					'label'       => 'Город объекта',
-					'input_class' => [ 'select' ],
 					'options'     => $this->get_field_city(),
 					'required'    => true,
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Выберите город объекта',
 				],
 				'estate_ploshhad'         => [
 					'type'        => 'text',
 					'label'       => 'Площадь объекта',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Укажите площадь объекта',
 				],
 				'estate_stoimost'         => [
 					'type'        => 'text',
 					'label'       => 'Стоимость объекта',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Укажите стоимость объекта',
 				],
 				'estate_adres'            => [
 					'type'        => 'text',
 					'label'       => 'Адрес объекта',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Укажите адрес объекта',
 				],
 				'estate_zhilaya_ploshhad' => [
 					'type'        => 'text',
 					'label'       => 'Жилая площадь',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Укажите площадь',
 				],
 				'estate_etazh'            => [
 					'type'        => 'text',
 					'label'       => 'Этаж',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control" ),
 					'description' => 'Укажите этаж',
 				],
 				'estate_descriptions'     => [
 					'type'              => 'wysiwyg_editor',
 					'label'             => 'Описание объекта',
+					'class'             => array( "form-group" ),
+					'input_class'       => array( "form-control" ),
 					'description'       => 'Добавьте описание объекта',
 					'custom_attributes' => [
 						'wpautop'          => 1,
@@ -105,8 +121,10 @@ class Estate_Shortcode {
 					'value'             => '',
 				],
 				'estate_thumbnail'        => [
-					'type'  => 'file',
-					'label' => 'Миниатюра объекта',
+					'type'        => 'file',
+					'class'       => array( "form-group" ),
+					'input_class' => array( "form-control-file" ),
+					'label'       => 'Миниатюра объекта',
 				],
 
 			]
@@ -134,23 +152,23 @@ class Estate_Shortcode {
 		return $field_terms;
 	}
 
-    public function get_field_city(){
-	    $cities = get_posts( array(
-		    'numberposts' => -1,
-		    'orderby'     => 'date',
-		    'order'       => 'DESC',
-		    'post_type'   => 'cities',
-		    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-	    ) );
+	public function get_field_city() {
+		$cities = get_posts( array(
+			'numberposts'      => - 1,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'post_type'        => 'cities',
+			'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+		) );
 
-	    $field_city = [];
+		$field_city = [];
 
-	    foreach ( $cities as $city ) {
-		    $field_city[ $city->ID ] = $city->post_title;
-	    }
+		foreach ( $cities as $city ) {
+			$field_city[ $city->ID ] = $city->post_title;
+		}
 
-	    return $field_city;
-    }
+		return $field_city;
+	}
 
 
 }

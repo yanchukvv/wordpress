@@ -24,15 +24,16 @@ class Estate_Ajax {
 			'post_title'   => sanitize_text_field( $_POST['estate_title'] ),
 			'post_content' => wp_kses_post( $_POST['estate_descriptions'] ),
 			'meta_input'   => [
-				'ploshhad'     => sanitize_text_field( $_POST['estate_ploshhad'] ),
-				'stoimost' => sanitize_text_field( $_POST['estate_stoimost'] ),
-				'adres' => sanitize_text_field( $_POST['estate_adres'] ),
+				'ploshhad'         => sanitize_text_field( $_POST['estate_ploshhad'] ),
+				'stoimost'         => sanitize_text_field( $_POST['estate_stoimost'] ),
+				'adres'            => sanitize_text_field( $_POST['estate_adres'] ),
 				'zhilaya_ploshhad' => sanitize_text_field( $_POST['estate_zhilaya_ploshhad'] ),
-				'etazh' => sanitize_text_field( $_POST['estate_etazh'] ),
-				'gorod' => sanitize_text_field( $_POST['estate_city'] ),
+				'etazh'            => sanitize_text_field( $_POST['estate_etazh'] ),
+				'_gorod'           => sanitize_text_field( $_POST['estate_city'] ),
+				'gorod'            => sanitize_text_field( $_POST['estate_city'] ),
 			],
 			'tax_input'    => [
-				'type'   => $_POST['estate_type'],
+				'type' => $_POST['estate_type'],
 			],
 		];
 
@@ -42,7 +43,7 @@ class Estate_Ajax {
 
 		$this->set_term( $post_id, $data['tax_input'] );
 
-		$this->success( 'Объект `' . get_the_title($post_id) . '` успешно добавлен' );
+		$this->success( 'Объект `' . get_the_title( $post_id ) . '` успешно добавлен' );
 
 		wp_die();
 	}
@@ -94,9 +95,9 @@ class Estate_Ajax {
 		$error = [];
 
 		$required = [
-			'estate_title'    => 'Это обязательное поле.',
-			'estate_type'   => 'Это обязательное поле.',
-			'estate_city'   => 'Это обязательное поле.',
+			'estate_title' => 'Это обязательное поле.',
+			'estate_type'  => 'Это обязательное поле.',
+			'estate_city'  => 'Это обязательное поле.',
 
 		];
 
